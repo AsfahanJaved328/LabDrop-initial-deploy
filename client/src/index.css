@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+/*
+  LabDrop design tokens.
+  Palette: cool paper background + a single signal-teal accent (the
+  "connection is live" color), kept deliberately quiet everywhere else.
+*/
+@theme {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  --color-paper: #fafaf9;
+  --color-paper-raised: #ffffff;
+  --color-ink: #15181c;
+  --color-ink-muted: #5b6470;
+  --color-line: #e4e6e8;
+  --color-line-strong: #c7cbd1;
+
+  --color-signal: #1f6f6b;
+  --color-signal-strong: #175552;
+  --color-signal-soft: #e4f0ef;
+
+  --color-good: #2e7d5b;
+  --color-good-soft: #e4f3ea;
+  --color-bad: #c4453b;
+  --color-bad-soft: #fbe9e7;
+  --color-warn: #b8822c;
+  --color-warn-soft: #faf0dd;
+}
+
+:root {
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  @theme {
+    --color-paper: #101314;
+    --color-paper-raised: #171b1d;
+    --color-ink: #eef1f0;
+    --color-ink-muted: #9aa4a2;
+    --color-line: #262b2d;
+    --color-line-strong: #343b3d;
+
+    --color-signal: #4bbab3;
+    --color-signal-strong: #6fd0ca;
+    --color-signal-soft: #15302e;
+
+    --color-good: #6fcf9e;
+    --color-good-soft: #15301f;
+    --color-bad: #ef7a70;
+    --color-bad-soft: #391815;
+    --color-warn: #e0ad5c;
+    --color-warn-soft: #332308;
+  }
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  border-color: var(--color-line);
+}
+
+/* Visible, deliberate focus ring - never suppressed. */
+:focus-visible {
+  outline: 2px solid var(--color-signal);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.55;
+  }
+  70% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2.4s cubic-bezier(0.2, 0.7, 0.3, 1) infinite;
+}

@@ -1,0 +1,18 @@
+{
+  "name": "labdrop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LabDrop - scan a QR code on a shared lab computer, send files straight from your phone.",
+  "scripts": {
+    "install:all": "npm install --prefix server && npm install --prefix client",
+    "dev": "concurrently -n server,client -c green,cyan \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "build": "npm run build --prefix client",
+    "start": "npm run start --prefix server",
+    "test:smoke": "npm run test:smoke --prefix server",
+    "test:protocol": "npm run test:protocol --prefix client",
+    "test": "npm run test:smoke && npm run test:protocol"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}

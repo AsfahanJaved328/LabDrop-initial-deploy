@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: labdrop
+    runtime: node
+    plan: free
+    autoDeploy: true
+    buildCommand: |
+      npm install --prefix server
+      npm install --prefix client
+      npm run build --prefix client
+    startCommand: NODE_ENV=production npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: CLIENT_ORIGIN
+        value: https://your-render-domain.onrender.com
